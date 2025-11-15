@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define NULL ((void*)0)
+
+typedef struct _A { int value;struct _A*next;} A;
+typedef struct _list { A*head ; A*tail ; } List;
+
+List my_list;
+
+void add(List *list,int number);
+
+int main(){
+my_list.head=NULL;
+my_list.tail=NULL;
+
+int number=0;
+    
+while(number!=-1){
+    scanf("%d",&number);
+    if(number!=-1) add(&my_list,number);
+}
+
+//调试输出
+for(A*p=my_list.head;p!=NULL;p=p->next)
+{printf("%d ",p->value);}
+
+printf("hello world");
+
+return 0;}
+
+void add(List *list,int number){
+    //首先为新的节点申请一块内存，类型为自定义A类型，定义指向这个节点的指针p
+    A*p=(A*)malloc(sizeof(A));
+    p->value=number;
+    p->next=NULL;
+    
+    if(list->head){ 
+    //如果链表至少有一个节点，找到原链表中最后一个节点并连接新建节点和为节点
+    //否则将指向新建节点的指针p作为头指针和尾指针
+    //for(list->tail=list->head ; list->tail->next; list->tail=list->tail->next);
+
+    list->tail->next=p;
+    list->tail=p;
+    }else{
+    list->head=p;list->tail=p;
+    }
